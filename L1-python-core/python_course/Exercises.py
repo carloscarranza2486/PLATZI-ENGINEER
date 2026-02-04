@@ -10,7 +10,7 @@
 # print("afuera")
 
 
-# - Ejercicio 2 de la clase
+# # - Ejercicio 2 de la clase
 
 # x = 15
 # y = 20
@@ -24,7 +24,7 @@
 # if not x > 10:
 #     print("X no es mayor que 10")
 
-# Ejercicio 3 de la clase
+# # Ejercicio 3 de la clase
 
 # is_member = True
 # age = 11
