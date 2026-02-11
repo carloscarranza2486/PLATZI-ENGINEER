@@ -10,16 +10,18 @@
 #     if fruit == "Naranja":
 #         print("Naranja encontrada")
 
-x = 0
-while x < 5:
-    if x == 3:
-        break
-print(x)
-x += 1
+# x = 0
+# while x < 5:
+#     if x == 3:
+#         break
+# # print(x)
+# x += 1
 
 
-numbers = [1, 2, 3, 4, 5, 6]
-for i in numbers:
-    if i == 3:
-        continue
-    print(f"i es igual a: {i}")
+# numbers = [1, 2, 3, 4, 5, 6]
+# for i in numbers:
+#     if i == 3:
+#         continue
+#     # rint(f"i es igual a: {i}")
+
+numbers = [print(i) for i in range(1, 6)]
