@@ -38,3 +38,8 @@ def categorize_traditional(articles):
             if source == article.get('source').get('name'):
                 result[source].append(article)
     return result
+
+
+print(sources_extraction(sample_articles))
+print()
+print(categorize_traditional(sample_articles))
