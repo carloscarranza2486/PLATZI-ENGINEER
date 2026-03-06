@@ -44,11 +44,31 @@
 # # Líneas en blanco: Separar funciones y clases • lógicamente
 # # • Comillas consistentes: Usar comillas dobles para strings
 
-# def ejemplo_args(api_key, *args):
-#     print(f"API Key: {api_key}")
-#     print(f"Args: {args}")
-#     print(f"type args: {type(args)}")
-#     print("====")
+import urllib.request
+import urllib.parse
+API_KEY = "302b596673314c03a740f3c64b2f1ff6"
+BASE_URL = "https://newsapi.org/v2/everything"
+
+
+def newsapi_client(api_key, query, timeout=30, retries=3):
+    query_string = urllib.parse.urlencode({"q": query, "apiKEY": api_key})
+    url = f"{BASE_URL}?{query_string}"
+    with urllib.request.urlopen(url, timeout=timeout) as response:
+        data = response.read()
+        # Print first 100 chars for brevity
+        print(f"Response data: {data[:100]}...")
+    return f"NewAPI: {query} con timeout {timeout}"
+
+
+def guardian_client(api_key, section, from_date, timeout=30, retries=3):
+    return f"Guardian {section} desde {from_date} con timeout {timeout}"
+
+
+def ejemplo_args(api_key, *args):
+    print(f"API Key: {api_key}")
+    print(f"Args: {args}")
+    print(f"type args: {type(args)}")
+    print("====")
 
 
 # ejemplo_args("API_KEY_VALUE", "Este", "parametro", "acá")
@@ -61,4 +81,27 @@ def ejemplo_kwargs(**kwargs):
     print("====")
 
 
-ejemplo_kwargs(key="Value", llave="Valor")
+ejemplo_kwargs(
+    api_key="DEMO",
+    query="Noticias de python",
+    timeout=30,
+    retries=3,
+)
+ejemplo_kwargs(
+    api_key="DEMO GUARDIAN",
+    section="Sports",
+    from_date="2020-10-20",
+    timeout=30,
+    retries=3
+)
+
+
+def fetch_news(api_name, *args, **kwargs):
+    """
+    función flexible para conectar con la API
+    """
+
+    base_config = {
+        "timeout": 30,
+        "retries": 3,
+    }
