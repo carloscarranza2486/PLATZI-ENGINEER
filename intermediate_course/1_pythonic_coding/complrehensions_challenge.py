@@ -26,6 +26,15 @@ def sources_extraction_comprehension(articles):
     return {article['source']['name'] for article in articles}
 
 
-print(sources_extraction(sample_articles))
-print()
-print(sources_extraction_comprehension(sample_articles))
+def categorize_traditional(articles):
+    sources = sources_extraction_comprehension(articles)
+    result = {}
+
+    for source in sources:
+        if source not in result:
+            result[source] = []
+
+        for article in articles:
+            if source == article.get('source').get('name'):
+                result[source].append(article)
+    return result
