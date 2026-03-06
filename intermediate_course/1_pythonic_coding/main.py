@@ -44,12 +44,21 @@
 # # Líneas en blanco: Separar funciones y clases • lógicamente
 # # • Comillas consistentes: Usar comillas dobles para strings
 
-def ejemplo_args(api_key, *args):
-    print(f"API Key: {api_key}")
-    print(f"Args: {args}")
-    print(f"type args: {type(args)}")
+# def ejemplo_args(api_key, *args):
+#     print(f"API Key: {api_key}")
+#     print(f"Args: {args}")
+#     print(f"type args: {type(args)}")
+#     print("====")
+
+
+# ejemplo_args("API_KEY_VALUE", "Este", "parametro", "acá")
+# ejemplo_args("API_KEY_VALUE", "Hola", "mundo")
+
+
+def ejemplo_kwargs(**kwargs):
+    print(f"Kwargs: {type(kwargs)}")
+    print(f"Kwargs: {kwargs}")
     print("====")
 
 
-ejemplo_args("API_KEY_VALUE", "Este", "parametro", "acá")
-ejemplo_args("API_KEY_VALUE", "Hola", "mundo")
+ejemplo_kwargs(key="Value", llave="Valor")
