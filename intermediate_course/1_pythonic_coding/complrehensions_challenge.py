@@ -23,7 +23,7 @@ def sources_extraction(articles):
 
 
 def sources_extraction_comprehension(articles):
-    return [article['source']['name'] for article in articles if article['source']['name'] not in [a['source']['name'] for a in articles[:articles.index(article)]]]
+    return {article['source']['name'] for article in articles}
 
 
 print(sources_extraction(sample_articles))
