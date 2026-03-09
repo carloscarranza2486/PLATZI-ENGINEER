@@ -91,11 +91,14 @@ BASE_URL = "https://newsapi.org/v2/everything"
 def newsapi_client(api_key, query, timeout=30, retries=3):
     query_string = urllib.parse.urlencode({"q": query, "apiKEY": api_key})
     url = f"{BASE_URL}?{query_string}"
-
-    with urllib.request.urlopen(url, timeout=timeout) as response:
-        data = response.read().decode("utf-8")
-        return json.loads(data)
-    return f"NewAPI: {query} con timeout {timeout}"
+    try:
+        with urllib.request.urlopen(url, timeout=timeout) as response:
+            data = response.read().decode("utf-8")
+            return json.loads(data)
+        return f"NewAPI: {query} con timeout {timeout}"
+    except urllib.error.HTTPError:
+        print("La API KEY es inválida")
+        return {"articles": []}
 
 
 def fetch_news(api_name, *args, **kwargs):
