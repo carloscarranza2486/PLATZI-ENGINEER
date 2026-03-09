@@ -1,9 +1,17 @@
+class DivisionError(Exception):
+    """Error en operación"""
+
+    pass
+
+
 a = 0
 b = 0
 
 try:
     a = int(input("Digita un número: "))
     b = int(input("Digita otro número: "))
+    if b == 2:
+        raise DivisionError("No está permitido el cálculo por 2")
     resultado = a / b
     print(f"Resultado: {resultado}")
 except ValueError:
