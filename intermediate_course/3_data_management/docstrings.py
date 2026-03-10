@@ -1,32 +1,25 @@
 """
-Explicación de docstring.
+Explicación de docstrings.
 
-En esta clase puedo explicar cómo funcionan los docstrings en Python
+En esta clase puedo explicar cómo funcionan los docstrings en Python.
 """
 
 
 def ejemplo_sin_docstring():
-    return "Hola, Mundo"
+    return "Hola, mundo!"
 
 
 def ejemplo_con_docstring() -> str:
     """
-    Esta función devuelve un saludo.
-
-    Returns:
-        str: Un saludo en español
+    DESCRIPTION
+    ARGS
+    RETURNS
+    EXCEPTIONS
+    EXAMPLES
     """
-    return "Hola, Mundo"
+    return "Hola, mundo!"
 
 
-# qprint(ejemplo_con_docstring.__doc__)
-# help(ejemplo_con_docstring)
+print(ejemplo_con_docstring.__doc__)
+help(ejemplo_con_docstring)
 print(ejemplo_sin_docstring.__doc__)
-
-# ¿Qué debe incluir el docstring?
-"""
-Description
-Args
-Returns
-Examples
-"""
