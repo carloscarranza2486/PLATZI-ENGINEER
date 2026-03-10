@@ -9,13 +9,75 @@
 # DEFAULT_LANGUAGE = "es"  # PEP 8: Comillas dobles para strings
 
 
-# # PEP8: Utilidades comunes del proyecto - funciones en snake_case
-# def clean_text(text):
-#     # PEP 8: 4 espacios por indentación, no tabs
-#     """limpia y normaliza texto."""  # PEP 8: Docstring en comillas dobles triples
-#     if not text:
-#         return ""
-#     return text.strip().lower()
+import urllib.request
+import urllib.parse
+import json
+
+
+def clean_text(text: str) -> str:
+    """
+    Limpia y normaliza una cadena de texto.
+
+    Elimina los espacios en blanco al inicio y al final de la cadena,
+    y convierte todos los caracteres a minúsculas. Si la cadena está
+    vacía o es None, retorna una cadena vacía sin lanzar excepciones.
+
+    Parámetros
+    ----------
+    text : str
+        La cadena de texto que se desea limpiar y normalizar.
+        Puede ser None o una cadena vacía.
+
+    Retorna
+    -------
+    str
+        La cadena de texto sin espacios extremos y en minúsculas.
+        Retorna una cadena vacía ("") si la entrada es falsy
+        (None, "", espacios, etc.).
+
+    Excepciones
+    -----------
+    TypeError
+        Si ``text`` no es de tipo ``str`` ni ``None``, operaciones como
+        ``strip()`` o ``lower()`` lanzarán este error internamente.
+
+    Ejemplos
+    --------
+    Uso básico con texto normal:
+
+    >>> clean_text("  Hola Mundo  ")
+    'hola mundo'
+
+    Texto ya limpio permanece igual:
+
+    >>> clean_text("python")
+    'python'
+
+    Cadena vacía retorna cadena vacía:
+
+    >>> clean_text("")
+    ''
+
+    Valor None retorna cadena vacía:
+
+    >>> clean_text(None)
+    ''
+
+    Texto con caracteres especiales y mayúsculas:
+
+    >>> clean_text("  ÑOÑO  ")
+    'ñoño'
+
+    Notas
+    -----
+    - Esta función **no** elimina espacios internos entre palabras.
+    - No realiza normalización Unicode (e.g., acentos o caracteres especiales
+      quedan tal como están, solo en minúsculas).
+    - Para normalización avanzada, considere usar ``unicodedata.normalize()``.
+    """
+    if not text:
+        return ""
+    return text.strip().lower()
 
 
 # # PEP 8: Doble línea en blanco entre funciones para separar lógicamente
@@ -43,10 +105,6 @@
 # # -Imports• ordenados: estándar•→ terceros •→• locales
 # # Líneas en blanco: Separar funciones y clases • lógicamente
 # # • Comillas consistentes: Usar comillas dobles para strings
-
-import json
-import urllib.parse
-import urllib.request
 
 
 def guardian_client(api_key, section, from_date, timeout=30, retries=3):
