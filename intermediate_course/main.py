@@ -1,9 +1,10 @@
 """
 Sistema de análisis de noticias con APIs múltiples.
 """
-from config import API_KEY
-from exceptions import APIKeyError
-from news_api_client import fetch_news
+
+from news_analyzer.config import API_KEY
+from news_analyzer.exceptions import APIKeyError
+from news_analizer.api_client import fetch_news
 
 response_data = None
 try:

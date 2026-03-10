@@ -6,8 +6,8 @@ import urllib.parse
 import urllib.request
 from typing import Callable
 
-from config import BASE_URL
-from exceptions import APIKeyError
+from .config import BASE_URL
+from .exceptions import APIKeyError
 
 
 def validate_api_key(api_key: str) -> bool:

@@ -2,6 +2,23 @@ version = 1
 revision = 3
 requires-python = ">=3.13"
 
+[manifest]
+members = [
+    "intermediate-course",
+    "platzi-engineer",
+]
+
+[[package]]
+name = "intermediate-course"
+version = "0.1.0"
+source = { virtual = "intermediate_course" }
+dependencies = [
+    { name = "ruff" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "ruff", specifier = ">=0.15.5" }]
+
 [[package]]
 name = "platzi-engineer"
 version = "0.1.0"
