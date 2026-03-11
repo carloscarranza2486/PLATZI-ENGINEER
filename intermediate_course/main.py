@@ -14,4 +14,4 @@ except APIKeyError as e:
 
 if response_data:
     for article in response_data["articles"]:
-        print(article["title"])
+        print(article["source"])
