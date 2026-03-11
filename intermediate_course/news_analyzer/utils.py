@@ -54,7 +54,7 @@ def process_article_data(raw_data: dict) -> dict:
     return {}
 
 
-def get_sources(articles):
+def get_unique_sources(articles):
     return {
         article.get("source").get("name")
         for article in articles

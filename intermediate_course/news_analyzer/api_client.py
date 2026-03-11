@@ -4,6 +4,7 @@ import json
 import urllib
 import urllib.parse
 import urllib.request
+import urllib.error
 from typing import Callable
 
 from .config import BASE_URL
