@@ -12,6 +12,9 @@ from news_analyzer.utils import (
 )
 from news_analyzer.open_ai import analyze_news_with_ia
 
+# En tu archivo main.py
+API_KEY = "302b596673314c03a740f3c64b2f1ff6"  # ¡Devuelve esta llave aquí!
+
 response_data = None
 try:
     response_data = fetch_news("newapi", api_key=API_KEY, query="Python")

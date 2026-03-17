@@ -30,10 +30,21 @@ def analyze_news_with_ia(articles: list[dict], query: str) -> str | None:
 
     print(prompt)
 
-    response = client.responses.create(
-        model="gpt-4o",
-        instructions="Eres un agente que lee contexto y responde de manera breve",
-        input=prompt,
+    # Sintaxis moderna de OpenAI (Chat Completions)
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",  # o gpt-4o-mini
+        messages=[
+            {
+                "role": "system",
+                "content": "Eres un agente que lee contexto y responde de manera breve",
+            },
+            {"role": "user", "content": prompt},
+        ],
+        temperature=0.7,
     )
 
-    print(response.output_text)
+    # Extraer el texto de la respuesta
+    output = response.choices[0].message.content
+    print(output)
+
+    return output
