@@ -2,6 +2,10 @@
 Sistema de análisis de noticias con APIs múltiples.
 """
 
+from dotenv import load_dotenv
+
+load_dotenv()  # Esto carga las llaves globalmente para todo el proyecto
+
 from news_analyzer.api_client import fetch_news
 from news_analyzer.config import API_KEY
 from news_analyzer.exceptions import APIKeyError

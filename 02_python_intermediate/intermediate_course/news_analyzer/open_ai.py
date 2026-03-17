@@ -6,11 +6,8 @@ load_dotenv()
 
 
 def analyze_news_with_ia(articles: list[dict], query: str) -> str | None:
-
-    client = OpenAI(
-        # This is the default and can be omitted
-        api_key=os.environ.get("OPENAI_API_KEY"),
-    )
+    # Eliminamos el os.environ.get(), la librería lo busca automáticamente
+    client = OpenAI()
 
     context = "\n".join(
         [
