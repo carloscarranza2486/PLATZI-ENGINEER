@@ -1,26 +1,35 @@
+# Lista global o compartida que registre cada préstamo
+historial_prestamos = []
+
+
 class Libro:
     def __init__(self, titulo, autor, isbn, disponible=True):
-        self_titulo = titulo
-        self_autor = autor
+        self.titulo = titulo
+        self.autor = autor
         self.isbn = isbn
         self.disponible = disponible
-
-    def __str__(self):
-        return f"{self.titulo} por {self.autor} disponible: {self.disponible}"
 
     def prestar(self):
         if self.disponible:
             self.disponible = False
-        return f"'{self.titulo}' prestado exitosamente"
+            historial_prestamos.append(self)
+            return f"{self.titulo}: prestado exitosamente."
+
+    def devolver(self):
+        self.disponible = True
+        return f"{self.titulo}: ha sido devuelto y disponible nuevamente."
+
+    def es_popular(self):
+        return historial_prestamos.count(self) > 5
 
 
-mi_libro = Libro("100 años de soledad", "Gabriel García Marquez")
-otro_libro = Libro("El principito", "Saint-exupéry")
+# Ejemplo de uso
+libro1 = Libro("Cien años de soledad",
+               "Gabriel García Márquez", "978-0-06-088328-7")
+libro2 = Libro("El Principito", "Antoine de Saint-Exupéry",
+               "978-0-15-601219-5")
 
-print(mi_libro.prestar())
-print(mi_libro.devolver())
-
-catalogo = [mi_libro, otro_libro]
-
+catalogo = [libro1, libro2]
 for libro in catalogo:
-    print(libro)
+    # Se mejorará con __str__ más adelante
+    print(libro.titulo, libro.autor, libro.isbn, libro.disponible)
