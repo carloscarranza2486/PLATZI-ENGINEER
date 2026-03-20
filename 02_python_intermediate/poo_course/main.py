@@ -1,3 +1,4 @@
+
 # Lista global o compartida que registre cada préstamo
 historial_prestamos = []
 
