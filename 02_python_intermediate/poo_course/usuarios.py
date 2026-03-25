@@ -1,3 +1,14 @@
+from typing import Protocol
+
+from main import Libro
+
+
+class SolicitarProtocol(Protocol):
+    def solicitar_libro(self, titulo: str) -> str:
+        """Método que debe implementar cualquier solicitante"""
+        ...
+
+
 class Usuario:
     def __init__(self, nombre, cedula):
         self.nombre = nombre
@@ -38,9 +49,12 @@ class Profesor(Usuario):
 
 
 estudiante = Estudiante("Carlos", "123456789", "Sistemas")
+estudiante_1 = Estudiante("Jose", "56789123", "Salud")
 profesor = Profesor("Felipe", "123123123")
 
-print(profesor.solicitar_libro("Python Básico"))
-print(profesor.solicitar_libro("Python intermedio"))
-print(profesor.solicitar_libro("Python avanzado"))
-print(profesor.solicitar_libro("Python / Django"))
+libro = Libro("Titulo de prueba", "Autor de prueba", isbn="123123")
+
+usuarios: list[SolicitarProtocol] = [estudiante, estudiante_1, profesor, libro]
+
+for usuario in usuarios:
+    print(usuario.solicitar_libro("Titulo de ejemplo"))
