@@ -1,21 +1,14 @@
+from os import EX_CANTCREAT
 from biblioteca import Biblioteca
-from exceptions import BibliotecaError, LibroNoDisponibleError, UsuarioNoEncontradoError
-from libros import Libro, LibroFisico
-from usuarios import Estudiante, Profesor, SolicitarProtocol
-from exceptions import BibliotecaError
+from data import data_estudiantes, data_libros, libro1
+from exceptions import UsuarioNoEncontradoError, LibroNoDisponibleError
+from usuarios import Profesor
 
 biblioteca = Biblioteca("Platzi Biblioteca")
-
-estudiante = Estudiante("Carlos", "123456789", "Sistemas")
-estudiante_1 = Estudiante("Jose", "56789123", "Salud")
 profesor = Profesor("Felipe", "123123123")
 
-
-mi_libro = LibroFisico("100 Años de Soledad", "Gabriel Garcia Marquez", "9781644734728")
-otro_libro = LibroFisico("El Principito", "Saint-Exupéry", "9781644731234728")
-
-biblioteca.usuarios = [estudiante, estudiante_1, profesor]
-biblioteca.libros = [mi_libro, otro_libro]
+biblioteca.usuarios = [profesor] + data_estudiantes
+biblioteca.libros = data_libros
 
 
 print("Bienvenido a Platzi Biblioteca")
@@ -29,5 +22,21 @@ cedula = input("Digite el número de cédula: ")
 try:
     usuario = biblioteca.buscar_usuario(cedula)
     print(usuario.cedula, usuario.nombre)
-except UsuarioNoEncontradoError:
-    print("El usuario que estás buscando no existe")
+except UsuarioNoEncontradoError as e:
+    print(e)
+
+titulo = input("Digite el título del libro: ")
+try:
+    libro = biblioteca.buscar_libro(titulo)
+    print(f"El libro que seleccionaste es: {libro}")
+except LibroNoDisponibleError as e:
+    print(e)
+
+resultado = usuario.solicitar_libro(libro.titulo)
+print(f"\n{resultado}")
+
+try:
+    resultado_prestar = libro.prestar()
+    print(f"\n{resultado_prestar}")
+except LibroNoDisponibleError as e:
+    print(e)

@@ -1,4 +1,4 @@
-from exceptions import UsuarioNoEncontradoError
+from exceptions import UsuarioNoEncontradoError, LibroNoDisponibleError
 
 
 class Biblioteca:
@@ -17,3 +17,9 @@ class Biblioteca:
         raise UsuarioNoEncontradoError(
             f"El usuario con la cédula {cedula} no fue encontrado"
         )
+
+    def buscar_libro(self, titulo):
+        for libro in self.libros:
+            if libro.titulo == titulo and libro.disponible:
+                return libro
+        raise LibroNoDisponibleError(f"El libro no está disponible o no existe")
