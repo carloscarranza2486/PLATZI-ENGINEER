@@ -13,3 +13,8 @@ dependencies = [
 members = [
     "intermediate_course",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.7",
+]

@@ -53,11 +53,19 @@ dependencies = [
     { name = "ruff" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "ruff" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "icecream", specifier = ">=2.1.10" },
     { name = "ruff", specifier = ">=0.15.5" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "ruff", specifier = ">=0.15.7" }]
 
 [[package]]
 name = "pygments"
