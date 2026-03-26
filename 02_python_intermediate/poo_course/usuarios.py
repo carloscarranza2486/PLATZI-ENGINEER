@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from operator import concat
 from typing import Protocol
 
 from exceptions import TituloInvalidoError
@@ -31,6 +32,10 @@ class Usuario(UsuarioBase):
 
     def metodo_prueba(self):
         return "Metodo de prueba para saber como funciona ABC"
+
+    @property
+    def nombre_completo(self):
+        return f"{self.nombre} {self.cedula}"
 
 
 class Estudiante(Usuario):
