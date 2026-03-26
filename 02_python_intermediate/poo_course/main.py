@@ -1,11 +1,11 @@
-from os import EX_CANTCREAT
 from biblioteca import Biblioteca
-from data import data_estudiantes, data_libros, libro1
-from exceptions import UsuarioNoEncontradoError, LibroNoDisponibleError
+from data import data_estudiantes, data_libros
+from exceptions import LibroNoDisponibleError, UsuarioNoEncontradoError
 from usuarios import Profesor
 
 biblioteca = Biblioteca("Platzi Biblioteca")
 profesor = Profesor("Felipe", "123123123")
+
 
 biblioteca.usuarios = [profesor] + data_estudiantes
 biblioteca.libros = data_libros
@@ -13,22 +13,22 @@ biblioteca.libros = data_libros
 
 print("Bienvenido a Platzi Biblioteca")
 
-print("Libros disponibles: ")
+print("Libros disponibles:")
 for titulo in biblioteca.libros_disponibles():
     print(f"  - {titulo}")
 print()
 
-cedula = input("Digite el número de cédula: ")
+cedula = input("Digite el numero cedula: ")
 try:
     usuario = biblioteca.buscar_usuario(cedula)
     print(usuario.cedula, usuario.nombre)
 except UsuarioNoEncontradoError as e:
     print(e)
 
-titulo = input("Digite el título del libro: ")
+titulo = input("Digite el titulo del libro: ")
 try:
     libro = biblioteca.buscar_libro(titulo)
-    print(f"El libro que seleccionaste es: {libro}")
+    print(f"El libro que selecionaste es: {libro}")
 except LibroNoDisponibleError as e:
     print(e)
 

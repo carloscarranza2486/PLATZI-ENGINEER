@@ -1,21 +1,36 @@
+from abc import ABC, abstractmethod
 from typing import Protocol
-from exceptions import BibliotecaError, TituloInvalidoError
+
+from exceptions import TituloInvalidoError
 
 
-class SolicitarProtocol(Protocol):
+class SolicitanteProtocol(Protocol):
     def solicitar_libro(self, titulo: str) -> str:
-        """Método que debe implementar cualquier solicitante"""
+        """Metodo que debe implementar cualquier solicitante"""
         ...
 
 
-class Usuario:
+class UsuarioBase(ABC):
+    @abstractmethod
+    def solicitar_libro(self):
+        pass
+
+    @abstractmethod
+    def metodo_prueba(self):
+        pass
+
+
+class Usuario(UsuarioBase):
     def __init__(self, nombre, cedula):
         self.nombre = nombre
         self.cedula = cedula
         self.libros_prestados = []
 
     def solicitar_libro(self, titulo):
-        return f"La solicitud de libro {titulo} relizada"
+        return f"Solicitud de libro '{titulo}' realizada"
+
+    def metodo_prueba(self):
+        return "Metodo de prueba para saber como funciona ABC"
 
 
 class Estudiante(Usuario):
@@ -26,20 +41,15 @@ class Estudiante(Usuario):
 
     def solicitar_libro(self, titulo):
         if not titulo:
-            raise TituloInvalidoError(f"El libro con el título: {titulo} no es válido")
+            raise TituloInvalidoError(f"El libro con el titulo: {titulo}, no es válido")
 
         if len(self.libros_prestados) < self.limite_libros:
             self.libros_prestados.append(titulo)
-            return f"Préstamo del libro {titulo} autotizado"
+            return f"Prestamo del libro: {titulo} autorizado"
         else:
             return (
-                f"No puedes prestar más libros, límite alcanzado {self.limite_libros}"
+                f"No puedes prestar más libros, Limite alcanzado: {self.limite_libros}"
             )
-
-    def devolver_libro(self, titulo):
-        for titulo in self.libros_prestados:
-            self.libros_prestados.remove(titulo)
-            return f"El libro {titulo} se ha devuelto a la biblioteca"
 
 
 class Profesor(Usuario):
@@ -49,4 +59,4 @@ class Profesor(Usuario):
 
     def solicitar_libro(self, titulo):
         self.libros_prestados.append(titulo)
-        return f"Préstamo del libro {titulo} autotizado"
+        return f"Prestamo del libro: {titulo} autorizado"
