@@ -56,13 +56,13 @@ class Libro:
 
     @veces_prestado.setter
     def veces_prestado(self, veces_prestado):
-        if veces_prestado > 0:
-            self.__veces_prestado = veces_prestado
-        raise ValueError("El valor de veces_prestado debe ser mayor a cero")
+        if veces_prestado <= 0:
+            raise ValueError("El valor de veces_prestado debe ser mayor a cero")
+        self.__veces_prestado = veces_prestado
 
     @property
     def descripcion_completa(self):
-        return f"{self.titulo} por {self.autor} )ISBN: {self.isbn}"
+        return f"{self.titulo} por {self.autor} ISBN: {self.isbn}"
 
 
 class LibroFisico(Libro):

@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from operator import concat
 from typing import Protocol
 
 from exceptions import TituloInvalidoError

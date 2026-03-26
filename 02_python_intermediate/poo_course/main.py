@@ -34,9 +34,10 @@ print()
 cedula = input("Digite el numero cedula: ")
 try:
     usuario = biblioteca.buscar_usuario(cedula)
-    print(usuario.nombre_completo, usuario.nombre_completo)
+    print(usuario.nombre_completo, usuario.cedula)
 except UsuarioNoEncontradoError as e:
     print(e)
+    exit()
 
 titulo = input("Digite el titulo del libro: ")
 try:
@@ -44,6 +45,7 @@ try:
     print(f"El libro que selecionaste es: {libro}")
 except LibroNoDisponibleError as e:
     print(e)
+    exit()
 
 resultado = usuario.solicitar_libro(libro.titulo)
 print(f"\n{resultado}")
