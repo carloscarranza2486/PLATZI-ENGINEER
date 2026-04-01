@@ -16,13 +16,18 @@ class Persistencia:
             "libros": [libro.__dict__ for libro in biblioteca.libros],
             "fecha_guardado": datetime.now().isoformat(),
         }
-        with open(self.archivo, "w", encoding="utf-8") as f:
-            json.dump(datos, f, indent=4, ensure_ascii=False)
+        try:
+            with open(self.archivo, "w", encoding="utf-8") as f:
+                json.dump(datos, f, indent=4, ensure_ascii=False)
+        except FileNotFoundError:
+            raise FileNotFoundError(f"No se encontró el archivo {self.archivo}")
 
     def cargar_datos(self) -> Biblioteca:
-        with open(self.archivo, "r", encoding="utf-8") as f:
-            datos = json.load(f)
-
+        try:
+            with open(self.archivo, "r", encoding="utf-8") as f:
+                datos = json.load(f)
+        except FileNotFoundError:
+            raise FileNotFoundError(f"No se encontró el archivo {self.archivo}")
         # datos: {'titulo': 'Cien Años de Soledad', ' autor': 'Gabriel García Márquez', 'isbn': '9780307474728', 'disponible': True, '_Libro__veces_prestado': 0}
 
         biblioteca = Biblioteca(datos["nombre"])
