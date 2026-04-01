@@ -2,15 +2,18 @@ from biblioteca import Biblioteca
 from data import data_estudiantes, data_libros
 from exceptions import LibroNoDisponibleError, UsuarioNoEncontradoError
 from libros import Libro
-from usuarios import Profesor
+from usuarios import Estudiante, Profesor
+from persistencia import Persistencia
 
 
-biblioteca = Biblioteca("Platzi Biblioteca")
+biblioteca = Biblioteca("Platzi Biblioteca V2")
 profesor = Profesor("Felipe", "123123123")
 
 
 biblioteca.usuarios = [profesor] + data_estudiantes
 biblioteca.libros = data_libros
+persistencia = Persistencia()
+persistencia.guardar_datos(biblioteca)
 
 # Ejemplo setter
 # libro_de_prueba = data_libros[0]
@@ -55,3 +58,6 @@ try:
     print(f"\n{resultado_prestar}")
 except LibroNoDisponibleError as e:
     print(e)
+
+usuario1 = Estudiante.crear_estudiante_ingenieria("Carlos", "1234567890")
+print(f"Mi estudiante estudia: {usuario1.carrera}")

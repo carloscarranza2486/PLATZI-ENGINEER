@@ -55,6 +55,10 @@ class Estudiante(Usuario):
                 f"No puedes prestar más libros, Limite alcanzado: {self.limite_libros}"
             )
 
+    @classmethod
+    def crear_estudiante_ingenieria(cls, nombre, cedula):
+        return cls(nombre, cedula, carrera="ingeniería")
+
 
 class Profesor(Usuario):
     def __init__(self, nombre, cedula):
