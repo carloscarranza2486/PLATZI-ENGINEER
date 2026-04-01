@@ -1,31 +1,10 @@
-from biblioteca import Biblioteca
-from data import data_estudiantes, data_libros
 from exceptions import LibroNoDisponibleError, UsuarioNoEncontradoError
-from libros import Libro
-from usuarios import Estudiante, Profesor
+from usuarios import Estudiante
 from persistencia import Persistencia
 
 
-biblioteca = Biblioteca("Platzi Biblioteca V2")
-profesor = Profesor("Felipe", "123123123")
-
-
-biblioteca.usuarios = [profesor] + data_estudiantes
-biblioteca.libros = data_libros
 persistencia = Persistencia()
-persistencia.guardar_datos(biblioteca)
-
-# Ejemplo setter
-# libro_de_prueba = data_libros[0]
-# libro_de_prueba.veces_prestado = -1
-
-# result = Biblioteca.validar_isbn("2345678900")
-# print(f"El isbn es válido: {result}")
-libro_no_disponible = Libro.crear_no_disponible(
-    "Libro de prueba", "Autor de prueba", "1234567890"
-)
-
-print("libro disponible?:", libro_no_disponible.disponible)
+biblioteca = persistencia.cargar_datos()
 
 print("Bienvenido a Platzi Biblioteca")
 
@@ -61,3 +40,5 @@ except LibroNoDisponibleError as e:
 
 usuario1 = Estudiante.crear_estudiante_ingenieria("Carlos", "1234567890")
 print(f"Mi estudiante estudia: {usuario1.carrera}")
+
+persistencia.guardar_datos(biblioteca)
